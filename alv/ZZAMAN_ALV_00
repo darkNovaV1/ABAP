@@ -1,0 +1,40 @@
+*&---------------------------------------------------------------------*
+*& Report ZZAMAN_ALV_00
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zzaman_alv_00.
+
+TABLES : ekko, ekpo.
+
+TYPES : BEGIN OF tp_list,
+          sel,
+*   from header ekko
+          ebeln TYPE  ebeln,
+          bsart TYPE  bsart,
+          aedat TYPE  aedat,
+          ernam TYPE  ernam,
+          lifnr TYPE  lifnr,
+* VENDOR NAME LFA1
+          name1 TYPE char100,
+*  FROM ITEM TABLE EKPO
+          ebelp TYPE ebelp,
+          txz01 TYPE txz01,
+          matnr TYPE matnr,
+          menge TYPE bstmg,
+          meins TYPE bstme,
+          netpr TYPE bprei,
+          netwr TYPE bwert,
+        END OF tp_list.
+
+
+data : gt_list type TABLE of tp_list,
+       gs_list type tp_list,
+       gt_lfa1 type table of lfa1,
+       gs_ifa1 type lfa1.
+
+SELECTION-SCREEN begin of BLOCK b1 WITH FRAME TITLE text-001.
+  select-OPTIONS :s_ebeln for ekko-ebeln,
+                  s_aedat for ekko-aedat,
+                  s_bsart for ekko-bsart.
+  SELECTION-SCREEN end of BLOCK b1.
